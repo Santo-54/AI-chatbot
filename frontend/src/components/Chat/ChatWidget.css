@@ -1,0 +1,400 @@
+/* Existing styles */
+.chat-window {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.chat-window.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.chat-trigger-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    z-index: 1000;
+}
+
+.chat-trigger-btn:hover {
+    transform: scale(1.1);
+}
+
+.chat-header {
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #4cd964;
+    border-radius: 50%;
+}
+
+.chat-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.voice-mode-btn {
+    color: #4ade80;
+}
+
+.voice-mode-btn:hover {
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    line-height: 1.4;
+    font-size: 14px;
+    white-space: pre-wrap;
+    position: relative;
+}
+
+.message-content {
+    word-break: break-word;
+}
+
+.message-content p {
+    margin: 0 0 10px 0;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
+.message-content ul {
+    margin: 5px 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+.message-content li {
+    margin-bottom: 5px;
+}
+
+.message-content strong {
+    font-weight: 600;
+}
+
+.message.user {
+    align-self: flex-end;
+    background: #007bff;
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+.message.assistant {
+    align-self: flex-start;
+    background: white;
+    color: #333;
+    border: 1px solid #eee;
+    border-bottom-left-radius: 2px;
+}
+
+.chat-input-area {
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-input-area input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+.chat-input-area button,
+.mic-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.mic-btn {
+    background: #6c757d;
+}
+
+.chat-input-area button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.typing-indicator span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #bbb;
+    border-radius: 50%;
+    margin-right: 3px;
+    animation: typing 1s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Audio Pulse Indicator */
+.audio-loading-pulse {
+    position: absolute;
+    bottom: -5px;
+    right: 5px;
+    background: #007bff;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    animation: speak-pulse 1s infinite;
+}
+
+@keyframes speak-pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+}
+
+/* Advanced Recording View */
+.recording-view {
+    padding: 15px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideUp 0.3s ease-out;
+}
+
+.recording-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.recording-timer {
+    font-family: monospace;
+    font-weight: bold;
+    color: #dc3545;
+    font-size: 16px;
+    min-width: 45px;
+}
+
+.waveform {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 30px;
+}
+
+.waveform span {
+    display: block;
+    width: 3px;
+    background: #dc3545;
+    border-radius: 2px;
+    animation: wave 1s infinite ease-in-out;
+}
+
+.waveform span:nth-child(1) {
+    height: 10px;
+    animation-delay: 0.1s;
+}
+
+.waveform span:nth-child(2) {
+    height: 20px;
+    animation-delay: 0.2s;
+}
+
+.waveform span:nth-child(3) {
+    height: 15px;
+    animation-delay: 0.3s;
+}
+
+.waveform span:nth-child(4) {
+    height: 25px;
+    animation-delay: 0.4s;
+}
+
+.waveform span:nth-child(5) {
+    height: 18px;
+    animation-delay: 0.3s;
+}
+
+.waveform span:nth-child(6) {
+    height: 22px;
+    animation-delay: 0.2s;
+}
+
+.waveform span:nth-child(7) {
+    height: 12px;
+    animation-delay: 0.1s;
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(1.5);
+    }
+}
+
+.recording-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.undo-btn {
+    background: #f8d7da !important;
+    color: #dc3545 !important;
+    border: 1px solid #f5c6cb !important;
+}
+
+.confirm-btn {
+    background: #d4edda !important;
+    color: #28a745 !important;
+    border: 1px solid #c3e6cb !important;
+}
+
+.undo-btn:hover {
+    background: #f5c6cb !important;
+}
+
+.confirm-btn:hover {
+    background: #c3e6cb !important;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
